@@ -1,0 +1,37 @@
+[
+    {
+        "titulo": "The Witcher 3",
+        "genero": "RPG",
+        "desarrollador": "CD Projekt Red",
+        "anio": 2015,
+        "rating": 9.8
+    },
+    {
+        "titulo": "God of War",
+        "genero": "Acción",
+        "desarrollador": "Santa Monica Studio",
+        "anio": 2018,
+        "rating": 9.7
+    },
+    {
+        "titulo": "Minecraft",
+        "genero": "Sandbox",
+        "desarrollador": "Mojang",
+        "anio": 2011,
+        "rating": 9.0
+    },
+    {
+        "titulo": "Skyrim",
+        "genero": "RPG",
+        "desarrollador": "Bethesda",
+        "anio": 2011,
+        "rating": 9.5
+    },
+    {
+        "titulo": "FIFA 23",
+        "genero": "Deportes",
+        "desarrollador": "EA Sports",
+        "anio": 2022,
+        "rating": 8.5
+    }
+]
