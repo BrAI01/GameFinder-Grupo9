@@ -28,13 +28,15 @@ GameFinder-Grupo9/
 ├── main.py
 ├── catalogo.py
 ├── modelos/
+│   ├── __init__.py
 │   └── videojuego.py
 ├── datos/
 │   └── videojuegos.json
 ├── servicios/
+│   ├── __init__.py
 │   └── reader.py
 ├── docs/
-│   └── TP0 GameFinder Grupo9.pdf
+│   └── TP0.md
 ├── README.md
 └── .gitignore
 ```
