@@ -3,7 +3,7 @@ from pathlib import Path
 from catalogo import Catalogo
 from modelos.videojuego import Videojuego
 from servicios.reader import leer_videojuegos
-
+from estructuras.arbol_binario import ArbolBinarioBusqueda
 
 RUTA_DATOS = Path(__file__).parent / "datos" / "videojuegos.json"
 
@@ -12,6 +12,7 @@ RUTA_DATOS = Path(__file__).parent / "datos" / "videojuegos.json"
 def cargar_catalogo():
     datos = leer_videojuegos(RUTA_DATOS)
     catalogo = Catalogo()
+    arbol = ArbolBinarioBusqueda()
 
     for dato in datos:
         videojuego = Videojuego(
@@ -23,8 +24,9 @@ def cargar_catalogo():
         )
 
         catalogo.agregar(videojuego)
+        arbol.insertar(videojuego)
 
-    return catalogo
+    return catalogo, arbol
 
 
 # Muestra una lista de videojuegos
@@ -36,7 +38,7 @@ def mostrar_lista(videojuegos):
 
 def main():
 
-    catalogo = cargar_catalogo()
+    catalogo, arbol = cargar_catalogo()
 
     # Ordenamos el catálogo para poder utilizar
     # la búsqueda binaria
@@ -51,6 +53,8 @@ def main():
         print("2. Buscar videojuego con búsqueda binaria")
         print("3. Listar videojuegos")
         print("4. Filtrar por género")
+        print("5. Buscar videojuego con árbol BST")
+        print("6. Listar videojuegos ordenados con árbol BST")
         print("0. Salir")
 
         opcion = input("\nSeleccione una opción: ").strip()
@@ -110,6 +114,29 @@ def main():
 
             else:
                 print("\nNo se encontraron videojuegos.")
+
+        #Arbol binario
+        elif opcion == "5":
+
+            titulo = input("\nIngrese el título: ")
+
+            videojuego = arbol.buscar(titulo)
+
+            if videojuego:
+                print("\nVIDEOJUEGO ENCONTRADO CON ÁRBOL BST")
+                print("-----------------------------------")
+                videojuego.mostrar()
+            else:
+                print("\nNo se encontró el videojuego.")
+
+        elif opcion == "6":
+
+            print("\nVIDEOJUEGOS ORDENADOS CON ÁRBOL BST")
+            print("------------------------------------")
+
+            videojuegos = arbol.listar_ordenado()
+
+            mostrar_lista(videojuegos)
 
 
         # Salir
