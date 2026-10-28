@@ -6,6 +6,7 @@ from servicios.reader import leer_videojuegos
 from estructuras.arbol_binario import ArbolBinarioBusqueda
 from estructuras.arbol_avl import ArbolAVL
 from estructuras.arbol_general import ArbolGeneral
+from estructuras.heap_binario import HeapBinario
 
 
 RUTA_DATOS = Path(__file__).parent / "datos" / "videojuegos.json"
@@ -41,10 +42,34 @@ def cargar_catalogo():
     return catalogo, arbol, arbol_avl, arbol_categorias
 
 
+
 def mostrar_lista(videojuegos):
+    if not videojuegos:
+        print("No se encontraron videojuegos.")
+        return
+
     for videojuego in videojuegos:
         videojuego.mostrar()
-        print("-----------------------")
+
+
+def mostrar_top_videojuegos(catalogo, cantidad=5):
+    heap = HeapBinario()
+
+    for videojuego in catalogo.listar():
+        heap.insertar(videojuego)
+
+    ranking = heap.obtener_top_n(cantidad)
+
+    print(f"\nTOP {len(ranking)} VIDEOJUEGOS POR RATING")
+    print("-----------------------------------")
+
+    if not ranking:
+        print("No hay videojuegos en el catálogo.")
+        return
+
+    for posicion, videojuego in enumerate(ranking, start=1):
+        print(f"{posicion}. {videojuego.titulo} - Rating: {videojuego.rating}")
+
 
 
 def explorar_categorias(arbol_categorias):
@@ -111,6 +136,7 @@ def main():
         print("7. Buscar videojuego con árbol AVL")
         print("8. Listar videojuegos ordenados con árbol AVL")
         print("9. Explorar categorías")
+        print("10. Ver TOP 5 videojuegos por rating")
         print("0. Salir")
 
         opcion = input("\nSeleccione una opción: ").strip()
@@ -191,6 +217,9 @@ def main():
         elif opcion == "0":
             print("\nGracias por usar GameFinder.")
             break
+
+        elif opcion == "10":
+            mostrar_top_videojuegos(catalogo)
 
         else:
             print("\nOpción inválida.")
