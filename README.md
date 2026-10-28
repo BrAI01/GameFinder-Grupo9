@@ -1,6 +1,6 @@
 # GameFinder
 
-Trabajo Práctico Integrador de Estructuras de Datos - TP4
+Trabajo Práctico Integrador de Estructuras de Datos - TP6
 
 Grupo 9
 
@@ -12,53 +12,81 @@ Grupo 9
 
 ## Descripción
 
-GameFinder es un programa en Python para consultar un catálogo de videojuegos desde la terminal.
+GameFinder es una aplicación de terminal en Python para consultar un catálogo de videojuegos e incorporar progresivamente las estructuras de datos estudiadas en la materia.
 
-En esta entrega permite:
+Estado actual: **TP6 - versión 4**.
 
-- buscar un videojuego mediante búsqueda secuencial;
-- buscar un videojuego mediante búsqueda binaria;
-- buscar un videojuego mediante un Árbol Binario de Búsqueda (BST);
-- listar los videojuegos cargados;
-- filtrar videojuegos por género;
-- listar los videojuegos ordenados mediante el árbol BST;
-- buscar un videojuego mediante un árbol AVL;
-- listar los videojuegos ordenados mediante el árbol AVL.
+## Funcionalidades actuales
 
-Los datos se guardan en `datos/videojuegos.json` y se cargan mediante `servicios/reader.py`.
+- búsqueda secuencial por título;
+- búsqueda binaria por título;
+- listado del catálogo;
+- filtro por género;
+- búsqueda y recorrido con Árbol Binario de Búsqueda (BST);
+- búsqueda y recorrido con árbol AVL;
+- exploración de categorías mediante árbol general o n-ario;
+- ranking Top 5 mediante heap binaria por rating.
 
-## Búsquedas
+## Estructuras implementadas
 
-La búsqueda secuencial tiene una complejidad O(n).
+### TP2 - Búsquedas
 
-La búsqueda binaria tiene una complejidad O(log n) y requiere que los videojuegos estén ordenados por título.
+- secuencial: O(n);
+- binaria: O(log n) sobre el catálogo ordenado.
 
-El Árbol Binario de Búsqueda organiza los videojuegos según su título y permite realizar búsquedas recorriendo el árbol.
+Las mediciones se encuentran en `mediciones.py` y `docs/TP2.md`.
 
-El árbol AVL mantiene el equilibrio mediante rotaciones, lo que permite realizar búsquedas e inserciones con una complejidad O(log n).
+### TP3 - Árbol Binario de Búsqueda
 
-Los recorridos inorden permiten obtener los videojuegos ordenados alfabéticamente.
+El BST organiza los videojuegos por título e implementa:
 
-## Experimentos
+- inserción;
+- búsqueda;
+- recorrido inorden;
+- recorrido preorden;
+- recorrido postorden.
 
-Se realizaron pruebas comparando el BST y el AVL con títulos insertados en orden alfabético.
+La comparación contra búsqueda secuencial se encuentra en `comparacion_bst.py`.
 
-| Videojuegos | Altura BST | Altura AVL |
-|---:|---:|---:|
-| 100 | 100 | 7 |
-| 500 | 500 | 9 |
-| 1000 | 1000 | 10 |
+### TP4 - Árbol AVL
 
-Los resultados muestran que el BST puede quedar desbalanceado cuando se insertan títulos ordenados, mientras que el AVL mantiene una altura reducida.
+El AVL mantiene el árbol balanceado mediante rotaciones y conserva búsquedas e inserciones de complejidad O(log n) cuando mantiene el equilibrio.
 
-## Estructura
+### TP5 - Árbol general
+
+La jerarquía utilizada es:
+
+```text
+Videojuegos
+├── RPG
+│   ├── The Witcher 3
+│   └── Skyrim
+├── Acción
+│   └── God of War
+├── Sandbox
+│   └── Minecraft
+└── Deportes
+    └── FIFA 23
+```
+
+Se integra mediante la opción `9. Explorar categorías`.
+
+### TP6 - Heap binaria
+
+Se utiliza una max-heap donde el `rating` define la prioridad. La opción `10. Ver TOP 5 videojuegos por rating` obtiene los videojuegos de mayor prioridad.
+
+La implementación se encuentra en `estructuras/heap_binario.py` y las pruebas en `pruebas_heap.py`.
+
+## Estructura del repositorio
 
 ```text
 GameFinder-Grupo9/
 ├── main.py
 ├── catalogo.py
 ├── mediciones.py
+├── comparacion_bst.py
 ├── experimentos_avl.py
+├── pruebas_heap.py
 ├── modelos/
 │   ├── __init__.py
 │   └── videojuego.py
@@ -66,41 +94,76 @@ GameFinder-Grupo9/
 │   ├── __init__.py
 │   ├── nodo.py
 │   ├── arbol_binario.py
-│   └── arbol_avl.py
+│   ├── arbol_avl.py
+│   ├── arbol_general.py
+│   └── heap_binario.py
 ├── datos/
 │   └── videojuegos.json
 ├── servicios/
 │   ├── __init__.py
 │   └── reader.py
 ├── docs/
+│   ├── 01-requerimientos.md
+│   ├── 02-casos-de-uso.md
+│   ├── 03-diagrama-clases.md
+│   ├── 04-diagrama-datos.md
+│   ├── 05-gestion-proyecto.md
 │   ├── TP0.md
 │   ├── TP1.md
 │   ├── TP2.md
 │   ├── TP3.md
-│   └── TP4.md
+│   ├── TP4.md
+│   ├── TP5.md
+│   └── TP6.md
 ├── README.md
 └── .gitignore
 ```
 
 ## Ejecución
 
-Abrir una terminal en la carpeta del proyecto y ejecutar:
+Para ejecutar GameFinder:
 
 ```bash
 python main.py
 ```
 
-Desde el menú se pueden realizar las búsquedas y utilizar los árboles BST y AVL.
+En algunos equipos puede ser necesario utilizar `py main.py` o `python3 main.py`.
 
-Para realizar las mediciones de búsqueda secuencial y binaria:
+Para ejecutar las mediciones del TP2:
 
 ```bash
 python mediciones.py
 ```
 
-Para comparar el BST y el AVL:
+Para comparar búsqueda secuencial y BST:
+
+```bash
+python comparacion_bst.py
+```
+
+Para comparar BST y AVL:
 
 ```bash
 python experimentos_avl.py
 ```
 
+Para probar la heap:
+
+```bash
+python pruebas_heap.py
+```
+
+## Documentación
+
+- [Requerimientos](docs/01-requerimientos.md)
+- [Casos de uso](docs/02-casos-de-uso.md)
+- [Diagrama de clases](docs/03-diagrama-clases.md)
+- [Diagrama de datos](docs/04-diagrama-datos.md)
+- [Gestión del proyecto](docs/05-gestion-proyecto.md)
+- [TP0](docs/TP0.md)
+- [TP1](docs/TP1.md)
+- [TP2](docs/TP2.md)
+- [TP3](docs/TP3.md)
+- [TP4](docs/TP4.md)
+- [TP5](docs/TP5.md)
+- [TP6](docs/TP6.md)
