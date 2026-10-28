@@ -35,7 +35,6 @@ class ArbolBinarioBusqueda:
         actual = self.raiz
 
         while actual is not None:
-
             if titulo.lower() == actual.videojuego.titulo.lower():
                 return actual.videojuego
 
@@ -52,8 +51,29 @@ class ArbolBinarioBusqueda:
         return videojuegos
 
     def _inorden(self, nodo, videojuegos):
-
         if nodo is not None:
             self._inorden(nodo.izquierda, videojuegos)
             videojuegos.append(nodo.videojuego)
             self._inorden(nodo.derecha, videojuegos)
+
+    def listar_preorden(self):
+        videojuegos = []
+        self._preorden(self.raiz, videojuegos)
+        return videojuegos
+
+    def _preorden(self, nodo, videojuegos):
+        if nodo is not None:
+            videojuegos.append(nodo.videojuego)
+            self._preorden(nodo.izquierda, videojuegos)
+            self._preorden(nodo.derecha, videojuegos)
+
+    def listar_postorden(self):
+        videojuegos = []
+        self._postorden(self.raiz, videojuegos)
+        return videojuegos
+
+    def _postorden(self, nodo, videojuegos):
+        if nodo is not None:
+            self._postorden(nodo.izquierda, videojuegos)
+            self._postorden(nodo.derecha, videojuegos)
+            videojuegos.append(nodo.videojuego)
