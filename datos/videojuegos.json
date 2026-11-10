@@ -33,5 +33,68 @@
         "desarrollador": "EA Sports",
         "anio": 2022,
         "rating": 8.5
+    },
+    {
+        "titulo": "Elden Ring",
+        "genero": "RPG",
+        "desarrollador": "FromSoftware",
+        "anio": 2022,
+        "rating": 9.6
+    },
+    {
+        "titulo": "Fallout 4",
+        "genero": "RPG",
+        "desarrollador": "Bethesda",
+        "anio": 2015,
+        "rating": 8.7
+    },
+    {
+        "titulo": "Cyberpunk 2077",
+        "genero": "RPG",
+        "desarrollador": "CD Projekt Red",
+        "anio": 2020,
+        "rating": 8.6
+    },
+    {
+        "titulo": "Dark Souls III",
+        "genero": "Acción",
+        "desarrollador": "FromSoftware",
+        "anio": 2016,
+        "rating": 9.1
+    },
+    {
+        "titulo": "God of War Ragnarök",
+        "genero": "Acción",
+        "desarrollador": "Santa Monica Studio",
+        "anio": 2022,
+        "rating": 9.4
+    },
+    {
+        "titulo": "The Last of Us",
+        "genero": "Acción",
+        "desarrollador": "Naughty Dog",
+        "anio": 2013,
+        "rating": 9.5
+    },
+    {
+        "titulo": "Terraria",
+        "genero": "Sandbox",
+        "desarrollador": "Re-Logic",
+        "anio": 2011,
+        "rating": 8.9
+    },
+    {
+        "titulo": "EA Sports FC 24",
+        "genero": "Deportes",
+        "desarrollador": "EA Sports",
+        "anio": 2023,
+        "rating": 7.9
+    },
+    {
+        "titulo": "NBA 2K24",
+        "genero": "Deportes",
+        "desarrollador": "Visual Concepts",
+        "anio": 2023,
+        "rating": 7.5
     }
 ]
