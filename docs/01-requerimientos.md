@@ -19,6 +19,7 @@ Desarrollar una aplicación de terminal en Python que permita consultar un catá
 7. Buscar y recorrer videojuegos mediante un árbol AVL.
 8. Explorar una jerarquía de categorías mediante un árbol general o n-ario.
 9. Obtener un ranking Top-N de videojuegos mediante una heap binaria basada en rating.
+10. Consultar videojuegos relacionados mediante un grafo no dirigido por género o desarrollador.
 
 ## Requerimientos no funcionales
 
