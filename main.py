@@ -7,7 +7,6 @@ from estructuras.arbol_binario import ArbolBinarioBusqueda
 from estructuras.arbol_avl import ArbolAVL
 from estructuras.arbol_general import ArbolGeneral
 from estructuras.heap_binario import HeapBinario
-from estructuras.grafo import construir_grafo
 
 
 RUTA_DATOS = Path(__file__).parent / "datos" / "videojuegos.json"
@@ -40,9 +39,7 @@ def cargar_catalogo():
 
         arbol_categorias.agregar_hijo(genero, dato["titulo"])
 
-    grafo = construir_grafo(catalogo.listar())
-
-    return catalogo, arbol, arbol_avl, arbol_categorias, grafo
+    return catalogo, arbol, arbol_avl, arbol_categorias
 
 
 
@@ -121,67 +118,8 @@ def explorar_categorias(arbol_categorias):
             print("\nOpción inválida.")
 
 
-def explorar_relaciones(grafo):
-    while True:
-        print("\n================================")
-        print("   RELACIONES ENTRE VIDEOJUEGOS")
-        print("================================")
-        print("1. Ver videojuegos relacionados")
-        print("2. Verificar si dos videojuegos están relacionados")
-        print("3. Ver grafo completo (lista de adyacencia)")
-        print("0. Volver")
-
-        opcion = input("\nSeleccione una opción: ").strip()
-
-        if opcion == "1":
-            titulo = input("\nIngrese el título: ")
-            videojuego = grafo.obtener_vertice(titulo)
-
-            if videojuego is None:
-                print("\nNo se encontró el videojuego.")
-                continue
-
-            vecinos = grafo.obtener_vecinos(titulo)
-            print(f"\nSi te gustó {videojuego.titulo}, quizás te interesen:")
-            print("------------------------------------------")
-
-            if not vecinos:
-                print("No hay videojuegos relacionados.")
-
-            for vecino in vecinos:
-                print(
-                    f"- {vecino.titulo} ({vecino.genero}, "
-                    f"{vecino.desarrollador}) - Rating: {vecino.rating}"
-                )
-
-        elif opcion == "2":
-            titulo_a = input("\nPrimer videojuego: ")
-            titulo_b = input("Segundo videojuego: ")
-
-            if grafo.obtener_vertice(titulo_a) is None or grafo.obtener_vertice(titulo_b) is None:
-                print("\nAlguno de los videojuegos no existe en el catálogo.")
-            elif grafo.estan_conectados(titulo_a, titulo_b):
-                print("\nSí, están relacionados (comparten género o desarrollador).")
-            else:
-                print("\nNo están relacionados directamente.")
-
-        elif opcion == "3":
-            print("\nGRAFO DE VIDEOJUEGOS")
-            print("--------------------")
-            print(f"Vértices: {grafo.cantidad_vertices()} - Aristas: {grafo.cantidad_aristas()}\n")
-
-            for titulo, vecinos in grafo.lista_adyacencia():
-                print(f"{titulo} -> {', '.join(vecinos) if vecinos else '(sin relaciones)'}")
-
-        elif opcion == "0":
-            break
-
-        else:
-            print("\nOpción inválida.")
-
-
 def main():
-    catalogo, arbol, arbol_avl, arbol_categorias, grafo = cargar_catalogo()
+    catalogo, arbol, arbol_avl, arbol_categorias = cargar_catalogo()
 
     catalogo.ordenar_por_titulo()
 
@@ -199,7 +137,6 @@ def main():
         print("8. Listar videojuegos ordenados con árbol AVL")
         print("9. Explorar categorías")
         print("10. Ver TOP 5 videojuegos por rating")
-        print("11. Explorar relaciones entre videojuegos")
         print("0. Salir")
 
         opcion = input("\nSeleccione una opción: ").strip()
@@ -283,9 +220,6 @@ def main():
 
         elif opcion == "10":
             mostrar_top_videojuegos(catalogo)
-
-        elif opcion == "11":
-            explorar_relaciones(grafo)
 
         else:
             print("\nOpción inválida.")
