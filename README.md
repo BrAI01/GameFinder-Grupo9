@@ -1,6 +1,6 @@
 # GameFinder
 
-Trabajo Práctico Integrador de Estructuras de Datos - TP6
+Trabajo Práctico Integrador de Estructuras de Datos - TP7
 
 Grupo 9
 
@@ -14,7 +14,7 @@ Grupo 9
 
 GameFinder es una aplicación de terminal en Python para consultar un catálogo de videojuegos e incorporar progresivamente las estructuras de datos estudiadas en la materia.
 
-Estado actual: **TP6 - versión 4**.
+Estado actual: **TP7 - versión 5**.
 
 ## Funcionalidades actuales
 
@@ -25,7 +25,8 @@ Estado actual: **TP6 - versión 4**.
 - búsqueda y recorrido con Árbol Binario de Búsqueda (BST);
 - búsqueda y recorrido con árbol AVL;
 - exploración de categorías mediante árbol general o n-ario;
-- ranking Top 5 mediante heap binaria por rating.
+- ranking Top 5 mediante heap binaria por rating;
+- recomendación de videojuegos relacionados mediante un grafo.
 
 ## Estructuras implementadas
 
@@ -77,6 +78,14 @@ Se utiliza una max-heap donde el `rating` define la prioridad. La opción `10. V
 
 La implementación se encuentra en `estructuras/heap_binario.py` y las pruebas en `pruebas_heap.py`.
 
+### TP7 - Grafos
+
+Cada videojuego es un vértice y dos videojuegos se conectan con una arista cuando comparten género o desarrollador. El grafo es no dirigido y no pesado, y se representa con una lista de adyacencia porque es disperso.
+
+Se integra mediante la opción `11. Explorar relaciones entre videojuegos`, que muestra los videojuegos relacionados, verifica si dos títulos están conectados y muestra el grafo completo.
+
+La implementación se encuentra en `estructuras/grafo.py` y las pruebas en `pruebas_grafo.py`.
+
 ## Estructura del repositorio
 
 ```text
@@ -87,6 +96,7 @@ GameFinder-Grupo9/
 ├── comparacion_bst.py
 ├── experimentos_avl.py
 ├── pruebas_heap.py
+├── pruebas_grafo.py
 ├── modelos/
 │   ├── __init__.py
 │   └── videojuego.py
@@ -96,7 +106,8 @@ GameFinder-Grupo9/
 │   ├── arbol_binario.py
 │   ├── arbol_avl.py
 │   ├── arbol_general.py
-│   └── heap_binario.py
+│   ├── heap_binario.py
+│   └── grafo.py
 ├── datos/
 │   └── videojuegos.json
 ├── servicios/
@@ -114,7 +125,8 @@ GameFinder-Grupo9/
 │   ├── TP3.md
 │   ├── TP4.md
 │   ├── TP5.md
-│   └── TP6.md
+│   ├── TP6.md
+│   └── TP7.md
 ├── README.md
 └── .gitignore
 ```
@@ -153,6 +165,12 @@ Para probar la heap:
 python pruebas_heap.py
 ```
 
+Para probar el grafo:
+
+```bash
+python pruebas_grafo.py
+```
+
 ## Documentación
 
 - [Requerimientos](docs/01-requerimientos.md)
@@ -167,3 +185,4 @@ python pruebas_heap.py
 - [TP4](docs/TP4.md)
 - [TP5](docs/TP5.md)
 - [TP6](docs/TP6.md)
+- [TP7](docs/TP7.md)
