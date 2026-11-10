@@ -69,12 +69,23 @@ classDiagram
         +obtener_top_n(cantidad)
     }
 
+    class GrafoVideojuegos {
+        -vertices
+        -adyacencia
+        +agregar_vertice(videojuego)
+        +agregar_arista(a, b)
+        +obtener_vecinos(titulo)
+        +estan_conectados(a, b)
+        +lista_adyacencia()
+    }
+
     Catalogo "1" o-- "*" Videojuego
     ArbolBinarioBusqueda o-- Nodo
     Nodo --> Videojuego
     ArbolAVL --> Videojuego
     ArbolGeneral o-- NodoGeneral
     HeapBinario --> Videojuego
+    GrafoVideojuegos --> Videojuego
 ```
 
 ## Descripción
