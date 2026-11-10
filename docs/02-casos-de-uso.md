@@ -63,3 +63,24 @@ Usuario de GameFinder desde la terminal.
 2. El sistema carga los videojuegos en una max-heap.
 3. Extrae hasta cinco elementos de mayor prioridad.
 4. Muestra el ranking en orden descendente de rating.
+
+
+## CU07 - Explorar relaciones entre videojuegos
+
+**Objetivo:** encontrar juegos relacionados por género o desarrollador.
+
+**Flujo principal:**
+1. El usuario elige la opción 11.
+2. Ingresa un título y consulta sus vecinos, o verifica si dos juegos están conectados.
+3. El sistema responde usando el grafo de adyacencia.
+
+## Esquema de casos de uso
+
+```mermaid
+flowchart LR
+    U[Usuario] --> B[Buscar videojuegos]
+    U --> L[Listar y filtrar]
+    U --> C[Explorar categorías]
+    U --> T[Consultar Top 5]
+    U --> R[Explorar relaciones]
+```
