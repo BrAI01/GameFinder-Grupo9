@@ -31,6 +31,7 @@ El proyecto se desarrolla de forma incremental en un único repositorio de GitHu
 - TP4: árbol AVL;
 - TP5: árbol general o n-ario;
 - TP6: heap binaria y ranking Top-N.
+- TP7: grafo y consultas de relaciones entre videojuegos.
 
 ## Criterio de integración
 
