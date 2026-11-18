@@ -1,6 +1,6 @@
 # GameFinder
 
-Trabajo Práctico Integrador de Estructuras de Datos - TP7
+Trabajo Práctico Integrador de Estructuras de Datos - TP8
 
 Grupo 9
 
@@ -14,7 +14,7 @@ Grupo 9
 
 GameFinder es una aplicación de terminal en Python para consultar un catálogo de videojuegos e incorporar progresivamente las estructuras de datos estudiadas en la materia.
 
-Estado actual: **TP7 - versión 5**.
+Estado actual: **TP8 - versión 6**.
 
 ## Funcionalidades actuales
 
@@ -26,7 +26,9 @@ Estado actual: **TP7 - versión 5**.
 - búsqueda y recorrido con árbol AVL;
 - exploración de categorías mediante árbol general o n-ario;
 - ranking Top 5 mediante heap binaria por rating;
-- recomendación de videojuegos relacionados mediante un grafo.
+- recomendación de videojuegos relacionados mediante un grafo;
+- recorridos BFS y DFS sobre el grafo;
+- búsqueda del camino con menor cantidad de conexiones entre dos videojuegos mediante BFS.
 
 ## Estructuras implementadas
 
@@ -82,9 +84,18 @@ La implementación se encuentra en `estructuras/heap_binario.py` y las pruebas e
 
 Cada videojuego es un vértice y dos videojuegos se conectan con una arista cuando comparten género o desarrollador. El grafo es no dirigido y no pesado, y se representa con una lista de adyacencia porque es disperso.
 
-Se integra mediante la opción `11. Explorar relaciones entre videojuegos`, que muestra los videojuegos relacionados, verifica si dos títulos están conectados y muestra el grafo completo.
+Se integra mediante la opción `11. Explorar relaciones entre videojuegos`. El submenú permite mostrar videojuegos relacionados, verificar una conexión directa y mostrar el grafo completo.
 
 La implementación se encuentra en `estructuras/grafo.py` y las pruebas en `pruebas_grafo.py`.
+
+### TP8 - Recorridos BFS y DFS
+
+Se incorporan dos recorridos sobre el grafo:
+
+- **BFS (búsqueda en anchura):** recorre los videojuegos por niveles usando una cola FIFO. También se utiliza para encontrar el camino con menor cantidad de aristas entre dos videojuegos, ya que el grafo no tiene pesos.
+- **DFS (búsqueda en profundidad):** explora una rama antes de retroceder, utilizando una pila.
+
+Ambos recorridos tienen complejidad temporal **O(V + E)** y espacial **O(V)**, donde `V` es la cantidad de vértices y `E` la cantidad de aristas. Los métodos `recorrido_bfs`, `recorrido_dfs` y `camino_mas_corto_bfs` están implementados en `estructuras/grafo.py` y se acceden desde el submenú de la opción `11`.
 
 ## Estructura del repositorio
 
@@ -126,7 +137,8 @@ GameFinder-Grupo9/
 │   ├── TP4.md
 │   ├── TP5.md
 │   ├── TP6.md
-│   └── TP7.md
+│   ├── TP7.md
+│   └── TP8.md
 ├── README.md
 └── .gitignore
 ```
@@ -186,3 +198,4 @@ python pruebas_grafo.py
 - [TP5](docs/TP5.md)
 - [TP6](docs/TP6.md)
 - [TP7](docs/TP7.md)
+- [TP8](docs/TP8.md)
