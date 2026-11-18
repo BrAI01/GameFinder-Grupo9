@@ -57,6 +57,66 @@ def probar_operaciones_basicas():
     assert grafo.estan_conectados("Minecraft", "Terraria")
 
 
+def probar_bfs_y_dfs():
+    grafo = GrafoVideojuegos()
+
+    minecraft = Videojuego("Minecraft", "Sandbox", "Mojang", 2011, 9.0)
+    terraria = Videojuego("Terraria", "Sandbox", "Re-Logic", 2011, 8.9)
+    stardew = Videojuego("Stardew Valley", "Simulacion", "ConcernedApe", 2016, 9.0)
+    starbound = Videojuego("Starbound", "Sandbox", "Chucklefish", 2016, 8.5)
+
+    for juego in [minecraft, terraria, stardew, starbound]:
+        grafo.agregar_vertice(juego)
+
+    grafo.agregar_arista("Minecraft", "Terraria")
+    grafo.agregar_arista("Minecraft", "Stardew Valley")
+    grafo.agregar_arista("Terraria", "Starbound")
+
+    # BFS: primero visita los vecinos directos.
+    bfs = grafo.recorrido_bfs("Minecraft")
+    titulos_bfs = [juego.titulo for juego in bfs]
+
+    assert titulos_bfs[0] == "Minecraft"
+    assert titulos_bfs[1:3] == ["Terraria", "Stardew Valley"]
+    assert len(bfs) == 4
+
+    # DFS: explora una rama antes de retroceder.
+    dfs = grafo.recorrido_dfs("Minecraft")
+    titulos_dfs = [juego.titulo for juego in dfs]
+
+    assert titulos_dfs[0] == "Minecraft"
+    assert len(dfs) == 4
+    assert set(titulos_dfs) == {
+        "Minecraft",
+        "Terraria",
+        "Stardew Valley",
+        "Starbound",
+    }
+
+    # Camino más corto entre Minecraft y Starbound.
+    camino = grafo.camino_mas_corto_bfs("Minecraft", "Starbound")
+    titulos_camino = [juego.titulo for juego in camino]
+
+    assert titulos_camino == [
+        "Minecraft",
+        "Terraria",
+        "Starbound",
+    ]
+
+    # Videojuego inexistente.
+    assert grafo.recorrido_bfs("Inexistente") == []
+    assert grafo.recorrido_dfs("Inexistente") == []
+    assert grafo.camino_mas_corto_bfs("Minecraft", "Inexistente") == []
+
+    print("\nPRUEBAS BFS Y DFS")
+    print("-----------------")
+    print("BFS:", " -> ".join(titulos_bfs))
+    print("DFS:", " -> ".join(titulos_dfs))
+    print("Camino más corto:", " -> ".join(titulos_camino))
+    print("Todas las pruebas BFS y DFS pasaron correctamente.")
+
+
+
 def probar_grafo_con_catalogo():
     videojuegos = cargar_videojuegos()
     grafo = construir_grafo(videojuegos)
@@ -90,5 +150,6 @@ def probar_grafo_con_catalogo():
 if __name__ == "__main__":
     probar_grafo_vacio()
     probar_operaciones_basicas()
+    probar_bfs_y_dfs()
     probar_grafo_con_catalogo()
     print("\nTodas las pruebas del grafo pasaron correctamente.")

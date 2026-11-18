@@ -1,3 +1,5 @@
+from collections import deque
+
 class GrafoVideojuegos:
     """Grafo no dirigido de videojuegos, representado por adyacencias."""
 
@@ -36,6 +38,87 @@ class GrafoVideojuegos:
         if clave not in self._adyacencia:
             return None
         return list(self._adyacencia[clave].values())
+
+    
+    def recorrido_bfs(self, titulo_inicio):
+        """Recorre los videojuegos por niveles usando BFS."""
+        inicio = self._clave(titulo_inicio)
+
+        if inicio not in self._vertices:
+            return []
+
+        visitados = {inicio}
+        cola = deque([inicio])
+        recorrido = []
+
+        while cola:
+            actual = cola.popleft()
+            recorrido.append(self._vertices[actual])
+
+            for vecino in self._adyacencia[actual]:
+                if vecino not in visitados:
+                    visitados.add(vecino)
+                    cola.append(vecino)
+
+        return recorrido
+
+    def recorrido_dfs(self, titulo_inicio):
+        """Recorre los videojuegos en profundidad usando DFS."""
+        inicio = self._clave(titulo_inicio)
+
+        if inicio not in self._vertices:
+            return []
+
+        visitados = set()
+        pila = [inicio]
+        recorrido = []
+
+        while pila:
+            actual = pila.pop()
+
+            if actual not in visitados:
+                visitados.add(actual)
+                recorrido.append(self._vertices[actual])
+
+                vecinos = list(self._adyacencia[actual].keys())
+
+                for vecino in reversed(vecinos):
+                    if vecino not in visitados:
+                        pila.append(vecino)
+
+        return recorrido
+
+    def camino_mas_corto_bfs(self, titulo_inicio, titulo_destino):
+        """Encuentra el camino con menos aristas entre dos videojuegos."""
+        inicio = self._clave(titulo_inicio)
+        destino = self._clave(titulo_destino)
+
+        if inicio not in self._vertices or destino not in self._vertices:
+            return []
+
+        visitados = {inicio}
+        cola = deque([inicio])
+        anteriores = {inicio: None}
+
+        while cola:
+            actual = cola.popleft()
+
+            if actual == destino:
+                camino = []
+                while actual is not None:
+                    camino.append(self._vertices[actual])
+                    actual = anteriores[actual]
+
+                return camino[::-1]
+
+            for vecino in self._adyacencia[actual]:
+                if vecino not in visitados:
+                    visitados.add(vecino)
+                    anteriores[vecino] = actual
+                    cola.append(vecino)
+
+        return []
+
 
     def estan_conectados(self, titulo_a, titulo_b):
         a = self._clave(titulo_a)

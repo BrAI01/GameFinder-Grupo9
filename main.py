@@ -129,6 +129,8 @@ def explorar_relaciones(grafo):
         print("1. Ver videojuegos relacionados")
         print("2. Verificar si dos videojuegos están relacionados")
         print("3. Ver grafo completo (lista de adyacencia)")
+        print("4. Buscar camino más corto (BFS)")
+        print("5. Explorar relaciones en profundidad (DFS)")
         print("0. Volver")
 
         opcion = input("\nSeleccione una opción: ").strip()
@@ -172,6 +174,39 @@ def explorar_relaciones(grafo):
 
             for titulo, vecinos in grafo.lista_adyacencia():
                 print(f"{titulo} -> {', '.join(vecinos) if vecinos else '(sin relaciones)'}")
+
+
+        
+        elif opcion == "4":
+            origen = input("\nVideojuego de origen: ")
+            destino = input("Videojuego de destino: ")
+
+            camino = grafo.camino_mas_corto_bfs(origen, destino)
+
+            if not camino:
+                print("\nNo existe un camino entre esos videojuegos.")
+            else:
+                print("\nCAMINO MÁS CORTO (BFS)")
+                print("----------------------")
+                print(" -> ".join(juego.titulo for juego in camino))
+                print(f"Cantidad de conexiones: {len(camino) - 1}")
+
+
+        
+        elif opcion == "5":
+            titulo = input("\nVideojuego desde el que desea explorar: ")
+
+            recorrido = grafo.recorrido_dfs(titulo)
+
+            if not recorrido:
+                print("\nNo se encontró el videojuego.")
+            else:
+                print("\nEXPLORACIÓN EN PROFUNDIDAD (DFS)")
+                print("--------------------------------")
+                for posicion, juego in enumerate(recorrido, start=1):
+                    print(f"{posicion}. {juego.titulo}")
+                print(f"\nVideojuegos explorados: {len(recorrido)}")
+
 
         elif opcion == "0":
             break

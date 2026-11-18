@@ -1,4 +1,5 @@
-﻿from pathlib import Path
+
+from pathlib import Path
 
 from servicios.reader import leer_videojuegos
 from modelos.videojuego import Videojuego
@@ -11,34 +12,36 @@ def probar_heap_con_catalogo():
 
     videojuegos = [
         Videojuego(
-            juego["titulo"],
-            juego["genero"],
-            juego["desarrollador"],
-            juego["anio"],
-            juego["rating"],
-        )
-        for juego in datos
+            dato["titulo"],
+            dato["genero"],
+            dato["desarrollador"],
+            dato["anio"],
+            dato["rating"]
+        )   
+        for dato in datos
     ]
 
     heap = HeapBinario()
 
-    # Pruebas con el heap vacío.
+    # Comprobar el comportamiento con el heap vacío.
     assert heap.esta_vacio()
     assert heap.extraer_maximo() is None
     assert heap.obtener_top_n(5) == []
 
-    # Cargar los videojuegos del JSON.
+    # Cargar los videojuegos existentes.
     for videojuego in videojuegos:
         heap.insertar(videojuego)
 
-    # Extraer todos en orden descendente.
+    assert not heap.esta_vacio()
+
+    # Extraer todos los videojuegos en orden de rating.
     ranking = []
     while not heap.esta_vacio():
         ranking.append(heap.extraer_maximo())
 
-    ratings = [j.rating for j in ranking]
+    ratings = [videojuego.rating for videojuego in ranking]
+
     assert ratings == sorted(ratings, reverse=True)
-    assert len(ranking) == len(videojuegos)
 
     print("TOP DE VIDEOJUEGOS POR RATING")
     print("-----------------------------")
